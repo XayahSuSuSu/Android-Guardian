@@ -51,4 +51,7 @@ dependencies {
     def lifecycle_version = "2.4.1"
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+
+    // Design
+    implementation project(":design")
 }
