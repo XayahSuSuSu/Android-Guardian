@@ -5,4 +5,10 @@
     <string name="guard">守护</string>
     <string name="map">地图</string>
     <string name="settings">设置</string>
+    <string name="server">服务器</string>
+    <string name="connected">已连接</string>
+    <string name="battery_car">无人车电量</string>
+    <string name="battery_drone">无人机电量</string>
+    <string name="state">状态</string>
+    <string name="stay_at_home">居家</string>
 </resources>

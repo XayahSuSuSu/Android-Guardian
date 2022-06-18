@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -8,13 +9,59 @@
             type="com.xayah.guardian.fragment.home.HomeViewModel" />
     </data>
 
-    <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:animateLayoutChanges="true"
+                android:orientation="vertical"
+                android:paddingHorizontal="30dp"
+                android:paddingTop="30dp"
+                android:paddingBottom="30dp">
+
+                <com.xayah.design.LargeActionCard
+                    style="?attr/materialCardViewFilledStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="5dp"
+                    app:icon="@drawable/ic_round_cloud"
+                    app:subtext="@string/connected"
+                    app:text="@string/server" />
+
+                <com.xayah.design.LargeActionCard
+                    style="?attr/materialCardViewFilledStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="5dp"
+                    app:icon="@drawable/ic_round_navigation"
+                    app:subtext="@string/stay_at_home"
+                    app:text="@string/state" />
+
+                <com.xayah.design.LargeActionCard
+                    style="?attr/materialCardViewFilledStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="5dp"
+                    app:icon="@drawable/ic_round_battery_full"
+                    app:subtext="100%"
+                    app:text="@string/battery_car" />
+
+                <com.xayah.design.LargeActionCard
+                    style="?attr/materialCardViewFilledStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="5dp"
+                    app:icon="@drawable/ic_round_battery_4"
+                    app:subtext="50%"
+                    app:text="@string/battery_drone" />
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
