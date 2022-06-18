@@ -1,0 +1,4 @@
+<resources>
+
+    <style name="Theme.Guardian" parent="Base.Theme.Guardian" />
+</resources>

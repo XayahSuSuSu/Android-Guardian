@@ -1,0 +1,11 @@
+<resources>
+
+    <style name="Base.Theme.Guardian" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
+
+    </style>
+
+    <style name="Theme.Guardian" parent="Base.Theme.Guardian" />
+</resources>
