@@ -20,7 +20,11 @@ class Server {
                 client.newCall(request).execute().use { response ->
                     response.body?.apply {
                         // 解析response.body
-                        callback(Gson().fromJson(this.string(), Body::class.java))
+                        try {
+                            callback(Gson().fromJson(this.string(), Body::class.java))
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
                     }
                 }
             } catch (e: IOException) {
