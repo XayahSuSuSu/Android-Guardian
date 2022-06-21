@@ -1,0 +1,10 @@
+package com.xayah.guardian.util
+
+import com.xayah.guardian.App
+import com.xayah.guardian.R
+
+class GlobalString {
+    companion object {
+        val defaultServerAddress = App.globalContext.getString(R.string.default_server_address)
+    }
+}

@@ -11,4 +11,6 @@
     <string name="state">State</string>
     <string name="stay_at_home">Stay at home</string>
     <string name="config">Config</string>
+    <string name="server_address">Server address</string>
+    <string name="default_server_address" translatable="false">http://192.168.1.124:3399</string>
 </resources>

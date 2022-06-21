@@ -28,6 +28,14 @@
                     android:layout_height="wrap_content"
                     app:text="@string/config" />
 
+                <com.xayah.design.preference.EditableText
+                    onConfirm="@{viewModel.changeServerAddress}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:defaultValue="@string/default_server_address"
+                    app:summary="@{viewModel.serverAddress}"
+                    app:title="@string/server_address" />
+
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
