@@ -32,7 +32,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="5dp"
                     app:icon="@drawable/ic_round_cloud"
-                    app:subtext="@string/connected"
+                    app:subtext="@{viewModel.server}"
                     app:text="@string/server" />
 
                 <com.xayah.design.LargeActionCard

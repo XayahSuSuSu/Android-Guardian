@@ -28,6 +28,8 @@ class HomeFragment : Fragment() {
 
         val viewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
         binding.viewModel = viewModel
+
+        viewModel.initialize()
     }
 
     override fun onDestroyView() {
