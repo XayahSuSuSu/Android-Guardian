@@ -10,7 +10,7 @@
     <string name="battery_car">Car battery</string>
     <string name="battery_drone">Drone battery</string>
     <string name="state">State</string>
-    <string name="stay_at_home">Stay at home</string>
+    <string name="unknown">Unknown</string>
     <string name="config">Config</string>
     <string name="server_address">Server address</string>
     <string name="default_server_address" translatable="false">http://192.168.1.124:33307</string>

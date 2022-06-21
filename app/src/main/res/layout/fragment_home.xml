@@ -41,7 +41,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="5dp"
                     app:icon="@drawable/ic_round_navigation"
-                    app:subtext="@string/stay_at_home"
+                    app:subtext="@{viewModel.state}"
                     app:text="@string/state" />
 
                 <com.xayah.design.LargeActionCard
@@ -49,8 +49,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="5dp"
-                    app:icon="@drawable/ic_round_battery_full"
-                    app:subtext="100%"
+                    app:icon="@{viewModel.batteryCarIcon}"
+                    app:subtext="@{viewModel.batteryCar}"
                     app:text="@string/battery_car" />
 
                 <com.xayah.design.LargeActionCard
@@ -58,8 +58,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="5dp"
-                    app:icon="@drawable/ic_round_battery_4"
-                    app:subtext="50%"
+                    app:icon="@{viewModel.batteryDroneIcon}"
+                    app:subtext="@{viewModel.batteryDrone}"
                     app:text="@string/battery_drone" />
             </LinearLayout>
 

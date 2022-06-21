@@ -8,5 +8,6 @@ class GlobalString {
         val defaultServerAddress = App.globalContext.getString(R.string.default_server_address)
         val connected = App.globalContext.getString(R.string.connected)
         val disconnect = App.globalContext.getString(R.string.disconnect)
+        val unknown = App.globalContext.getString(R.string.unknown)
     }
 }
