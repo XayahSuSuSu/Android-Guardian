@@ -36,3 +36,11 @@ fun Context.saveServerAddress(path: CharSequence?) {
 fun Context.readServerAddress(): String {
     return readPreferencesString("server_address") ?: GlobalString.defaultServerAddress
 }
+
+fun Context.saveRTMPAddress(path: CharSequence?) {
+    savePreferences("rtmp_address", path.toString().trim())
+}
+
+fun Context.readRTMPAddress(): String {
+    return readPreferencesString("rtmp_address") ?: GlobalString.defaultRTMPAddress
+}

@@ -14,4 +14,6 @@
     <string name="config">Config</string>
     <string name="server_address">Server address</string>
     <string name="default_server_address" translatable="false">http://192.168.1.124:33307</string>
+    <string name="default_rtmp_address" translatable="false">rtmp://192.168.72.50:33308/stream/record</string>
+    <string name="rtmp_address">RTMP Address</string>
 </resources>

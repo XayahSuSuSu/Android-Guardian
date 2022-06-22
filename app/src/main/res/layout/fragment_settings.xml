@@ -36,6 +36,14 @@
                     app:summary="@{viewModel.serverAddress}"
                     app:title="@string/server_address" />
 
+                <com.xayah.design.preference.EditableText
+                    onConfirm="@{viewModel.changeRTMPAddress}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:defaultValue="@string/default_rtmp_address"
+                    app:summary="@{viewModel.RTMPAddress}"
+                    app:title="@string/rtmp_address" />
+
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
