@@ -15,4 +15,12 @@
     <string name="config">配置</string>
     <string name="server_address">服务器地址</string>
     <string name="rtmp_address">RTMP服务器地址</string>
+    <string name="video_decoder">视频解码</string>
+    <string name="fps">视频帧率</string>
+    <string name="seek_load_cost">寻加成本</string>
+    <string name="tcp_speed">TCP速度</string>
+    <string name="bit_rate">比特率</string>
+    <string name="court_camera">庭院摄像头</string>
+    <string name="video_cached">视频缓存</string>
+    <string name="audio_cached">音频缓存</string>
 </resources>
