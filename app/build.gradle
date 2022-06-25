@@ -63,4 +63,13 @@ dependencies {
 
     // ijkplayer
     implementation project(":ijkplayer")
+
+    // PermissionX
+    implementation 'com.guolindev.permissionx:permissionx:1.6.1'
+
+    // ActivityResultLauncher
+    implementation 'com.github.DylanCaiCoding:ActivityResultLauncher:1.1.2'
+
+    // TencentMap
+    implementation 'com.tencent.map:tencent-map-vector-sdk:4.3.4'
 }
