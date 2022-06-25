@@ -44,6 +44,14 @@
                     app:summary="@{viewModel.RTMPAddress}"
                     app:title="@string/rtmp_address" />
 
+                <com.xayah.design.preference.EditableText
+                    onConfirm="@{viewModel.changeRTMPCarAddress}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:defaultValue="@string/default_rtmp_car_address"
+                    app:summary="@{viewModel.RTMPCarAddress}"
+                    app:title="@string/rtmp_car_address" />
+
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

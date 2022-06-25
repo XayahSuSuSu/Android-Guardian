@@ -23,4 +23,7 @@
     <string name="court_camera">庭院摄像头</string>
     <string name="video_cached">视频缓存</string>
     <string name="audio_cached">音频缓存</string>
+    <string name="live_map">实时地图</string>
+    <string name="car_camera">行者摄像头</string>
+    <string name="rtmp_car_address">RTMP行者服务器地址</string>
 </resources>

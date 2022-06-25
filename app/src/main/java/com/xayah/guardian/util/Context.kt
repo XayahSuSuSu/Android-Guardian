@@ -44,3 +44,11 @@ fun Context.saveRTMPAddress(path: CharSequence?) {
 fun Context.readRTMPAddress(): String {
     return readPreferencesString("rtmp_address") ?: GlobalString.defaultRTMPAddress
 }
+
+fun Context.saveRTMPCarAddress(path: CharSequence?) {
+    savePreferences("rtmp_car_address", path.toString().trim())
+}
+
+fun Context.readRTMPCarAddress(): String {
+    return readPreferencesString("rtmp_car_address") ?: GlobalString.defaultRTMPCarAddress
+}

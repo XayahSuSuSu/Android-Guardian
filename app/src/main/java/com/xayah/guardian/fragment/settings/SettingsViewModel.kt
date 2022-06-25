@@ -3,10 +3,7 @@ package com.xayah.guardian.fragment.settings
 import androidx.lifecycle.ViewModel
 import com.xayah.design.preference.EditableText
 import com.xayah.guardian.App
-import com.xayah.guardian.util.readRTMPAddress
-import com.xayah.guardian.util.readServerAddress
-import com.xayah.guardian.util.saveRTMPAddress
-import com.xayah.guardian.util.saveServerAddress
+import com.xayah.guardian.util.*
 
 class SettingsViewModel : ViewModel() {
     var serverAddress = App.globalContext.readServerAddress()
@@ -19,5 +16,11 @@ class SettingsViewModel : ViewModel() {
     val changeRTMPAddress: (v: EditableText, content: CharSequence?) -> Unit = { v, content ->
         v.context.saveRTMPAddress(content.toString().trim())
         RTMPAddress = content.toString().trim()
+    }
+
+    var RTMPCarAddress = App.globalContext.readRTMPCarAddress()
+    val changeRTMPCarAddress: (v: EditableText, content: CharSequence?) -> Unit = { v, content ->
+        v.context.saveRTMPCarAddress(content.toString().trim())
+        RTMPCarAddress = content.toString().trim()
     }
 }
