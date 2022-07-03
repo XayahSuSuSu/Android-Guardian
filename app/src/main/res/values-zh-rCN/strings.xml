@@ -28,4 +28,5 @@
     <string name="rtmp_car_address">RTMP行者服务器地址</string>
     <string name="run_state">运行状态</string>
     <string name="refresh">刷新</string>
+    <string name="real_time_parameters">实时参数</string>
 </resources>
