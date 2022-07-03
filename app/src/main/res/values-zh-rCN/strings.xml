@@ -26,4 +26,6 @@
     <string name="live_map">实时地图</string>
     <string name="car_camera">行者摄像头</string>
     <string name="rtmp_car_address">RTMP行者服务器地址</string>
+    <string name="run_state">运行状态</string>
+    <string name="refresh">刷新</string>
 </resources>

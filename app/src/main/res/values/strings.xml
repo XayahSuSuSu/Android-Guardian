@@ -28,4 +28,6 @@
     <string name="car_camera">Car camera</string>
     <string name="default_rtmp_car_address" translatable="false">rtmp://192.168.1.124:33308/stream/car</string>
     <string name="rtmp_car_address">RTMP Car Address</string>
+    <string name="run_state">Run state</string>
+    <string name="refresh">Refresh</string>
 </resources>
