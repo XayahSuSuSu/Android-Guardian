@@ -3,14 +3,17 @@ package com.xayah.guardian.util
 import com.google.gson.Gson
 import com.xayah.guardian.App
 import com.xayah.guardian.data.Body
+import okhttp3.FormBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.io.IOException
+
 
 class Server {
     companion object {
         private val checkApi = "${App.globalContext.readServerAddress()}/api/v1/check"
         private val dataApi = "${App.globalContext.readServerAddress()}/api/v1/app/data"
+        private val actionApi = "${App.globalContext.readServerAddress()}/api/v1/action"
 
         fun check(callback: (body: Body) -> Unit) {
             try {
@@ -38,6 +41,31 @@ class Server {
                 val client = OkHttpClient()
                 val request: Request = Request.Builder()
                     .url(dataApi)
+                    .build()
+                client.newCall(request).execute().use { response ->
+                    response.body?.apply {
+                        // 解析response.body
+                        try {
+                            callback(Gson().fromJson(this.string(), Body::class.java))
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
+                    }
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+
+        fun action(action: String, callback: (body: Body) -> Unit) {
+            try {
+                val client = OkHttpClient()
+                val formBody = FormBody.Builder()
+                    .add("action", action)
+                    .build()
+                val request: Request = Request.Builder()
+                    .url(actionApi)
+                    .post(formBody)
                     .build()
                 client.newCall(request).execute().use { response ->
                     response.body?.apply {

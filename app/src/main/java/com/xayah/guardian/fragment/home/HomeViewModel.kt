@@ -2,6 +2,7 @@ package com.xayah.guardian.fragment.home
 
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
@@ -61,7 +62,7 @@ class HomeViewModel : ViewModel() {
         }
     }
 
-    fun getBatteryDrawable(context: Context, battery: Int): Drawable? {
+    private fun getBatteryDrawable(context: Context, battery: Int): Drawable? {
         when {
             0 == battery -> {
                 return AppCompatResources.getDrawable(
@@ -114,5 +115,4 @@ class HomeViewModel : ViewModel() {
         }
         return null
     }
-
 }

@@ -31,4 +31,5 @@
     <string name="run_state">Run state</string>
     <string name="refresh">Refresh</string>
     <string name="real_time_parameters">Real time parameters</string>
+    <string name="debug">Debug</string>
 </resources>

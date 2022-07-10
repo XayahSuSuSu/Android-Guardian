@@ -7,3 +7,8 @@ data class Body(
     val msg: String,
     val data: JsonObject
 )
+
+data class Action(
+    val action: String,
+    val state: String,
+)
