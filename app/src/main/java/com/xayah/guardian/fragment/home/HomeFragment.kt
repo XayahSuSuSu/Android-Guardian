@@ -12,7 +12,6 @@ import com.xayah.guardian.databinding.FragmentHomeBinding
 import com.xayah.guardian.util.Server
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
@@ -49,6 +48,7 @@ class HomeFragment : Fragment() {
                     }
                     MotionEvent.ACTION_UP -> {
                         flag.set(false)
+                        Server.action("cancel") {}
                     }
                 }
             }
@@ -66,6 +66,7 @@ class HomeFragment : Fragment() {
                     }
                     MotionEvent.ACTION_UP -> {
                         flag.set(false)
+                        Server.action("cancel") {}
                     }
                 }
             }
@@ -83,6 +84,7 @@ class HomeFragment : Fragment() {
                     }
                     MotionEvent.ACTION_UP -> {
                         flag.set(false)
+                        Server.action("cancel") {}
                     }
                 }
             }
@@ -100,6 +102,7 @@ class HomeFragment : Fragment() {
                     }
                     MotionEvent.ACTION_UP -> {
                         flag.set(false)
+                        Server.action("cancel") {}
                     }
                 }
             }
