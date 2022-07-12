@@ -2,13 +2,14 @@ package com.xayah.guardian.fragment.home
 
 import android.content.Context
 import android.graphics.drawable.Drawable
-import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
+import com.xayah.guardian.App
 import com.xayah.guardian.R
 import com.xayah.guardian.util.GlobalString
 import com.xayah.guardian.util.Server
+import com.xayah.guardian.util.readDeviceInfo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,7 +23,35 @@ class HomeViewModel : ViewModel() {
     var batteryCarIcon = ObservableField<Drawable?>()
     var batteryDroneIcon = ObservableField<Drawable?>()
 
+    var deviceInfo = App.globalContext.readDeviceInfo()
+    var bindTitle = ObservableField("")
+    var bindText = ObservableField("")
+    var bindBtn = ObservableField("")
+    var bindImage = ObservableField<Drawable>()
+
     fun initialize(context: Context) {
+        deviceInfo = App.globalContext.readDeviceInfo()
+        if (deviceInfo.code.isEmpty()) {
+            bindBtn.set(GlobalString.bind)
+            bindTitle.set(GlobalString.notBind)
+            bindText.set(GlobalString.pleaseBindDevice)
+            bindImage.set(
+                AppCompatResources.getDrawable(
+                    context,
+                    R.drawable.ic_iconfont_unlock
+                )
+            )
+        } else {
+            bindBtn.set(GlobalString.unbind)
+            bindTitle.set(GlobalString.bound)
+            bindText.set("${GlobalString.deviceCode}: ${deviceInfo.code.substring(0, 8)}")
+            bindImage.set(
+                AppCompatResources.getDrawable(
+                    context,
+                    R.drawable.ic_iconfont_lock
+                )
+            )
+        }
         CoroutineScope(Dispatchers.IO).launch {
             batteryCarIcon.set(
                 AppCompatResources.getDrawable(

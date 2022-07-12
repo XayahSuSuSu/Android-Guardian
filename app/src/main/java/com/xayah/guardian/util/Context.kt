@@ -2,6 +2,8 @@ package com.xayah.guardian.util
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
+import com.google.gson.Gson
+import com.xayah.guardian.data.DeviceInfo
 
 fun Context.savePreferences(key: String, value: String) {
     getSharedPreferences("settings", MODE_PRIVATE).edit().apply {
@@ -51,4 +53,21 @@ fun Context.saveRTMPCarAddress(path: CharSequence?) {
 
 fun Context.readRTMPCarAddress(): String {
     return readPreferencesString("rtmp_car_address") ?: GlobalString.defaultRTMPCarAddress
+}
+
+fun Context.saveDeviceInfo(deviceInfo: DeviceInfo) {
+    savePreferences("device_info", Gson().toJson(deviceInfo))
+}
+
+fun Context.readDeviceInfo(): DeviceInfo {
+    var deviceInfo = DeviceInfo("", "")
+    try {
+        deviceInfo = Gson().fromJson(
+            readPreferencesString("device_info") ?: "",
+            DeviceInfo::class.java
+        )
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+    return deviceInfo
 }

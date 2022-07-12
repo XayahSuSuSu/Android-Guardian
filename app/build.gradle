@@ -72,4 +72,10 @@ dependencies {
 
     // TencentMap
     implementation 'com.tencent.map:tencent-map-vector-sdk:4.3.4'
+
+    // Zxing
+    implementation 'com.github.jenly1314:zxing-lite:2.2.1'
+
+    // ActivityResultLauncher
+    implementation 'com.github.DylanCaiCoding:ActivityResultLauncher:1.1.2'
 }

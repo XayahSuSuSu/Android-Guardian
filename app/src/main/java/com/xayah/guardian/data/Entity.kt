@@ -12,3 +12,8 @@ data class Action(
     val action: String,
     val state: String,
 )
+
+data class DeviceInfo(
+    val timestamp: String,
+    val code: String,
+)

@@ -30,4 +30,10 @@
     <string name="refresh">刷新</string>
     <string name="real_time_parameters">实时参数</string>
     <string name="debug">调试</string>
+    <string name="not_bind">未绑定</string>
+    <string name="please_bind_device">请绑定设备</string>
+    <string name="bound">已绑定</string>
+    <string name="device_code">设备号</string>
+    <string name="bind">绑定</string>
+    <string name="unbind">解绑</string>
 </resources>

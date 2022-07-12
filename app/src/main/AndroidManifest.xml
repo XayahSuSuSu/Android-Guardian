@@ -28,6 +28,11 @@
         <meta-data
             android:name="TencentMapSDK"
             android:value="FSFBZ-ORBCX-YXQ4D-TJANU-NK6GQ-GVFJI" />
+
+        <activity
+            android:name="com.king.zxing.CaptureActivity"
+            android:screenOrientation="fullSensor"
+            android:theme="@style/CaptureTheme" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
