@@ -3,6 +3,7 @@ package com.xayah.guardian.fragment.home
 import android.content.Context
 import android.graphics.drawable.Drawable
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import com.xayah.guardian.App
@@ -23,6 +24,8 @@ class HomeViewModel : ViewModel() {
     var batteryCarIcon = ObservableField<Drawable?>()
     var batteryDroneIcon = ObservableField<Drawable?>()
 
+    var isBound = ObservableBoolean(false)
+
     var deviceInfo = App.globalContext.readDeviceInfo()
     var bindTitle = ObservableField("")
     var bindText = ObservableField("")
@@ -31,7 +34,12 @@ class HomeViewModel : ViewModel() {
 
     fun initialize(context: Context) {
         deviceInfo = App.globalContext.readDeviceInfo()
-        if (deviceInfo.code.isEmpty()) {
+        try {
+            isBound.set(deviceInfo.code.isNotEmpty())
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        if (!isBound.get()) {
             bindBtn.set(GlobalString.bind)
             bindTitle.set(GlobalString.notBind)
             bindText.set(GlobalString.pleaseBindDevice)
@@ -44,7 +52,7 @@ class HomeViewModel : ViewModel() {
         } else {
             bindBtn.set(GlobalString.unbind)
             bindTitle.set(GlobalString.bound)
-            bindText.set("${GlobalString.deviceCode}: ${deviceInfo.code.substring(0, 8)}")
+            bindText.set(deviceInfo.code.substring(0, 8))
             bindImage.set(
                 AppCompatResources.getDrawable(
                     context,

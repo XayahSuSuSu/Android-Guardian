@@ -14,7 +14,6 @@ class GlobalString {
         val notBind = App.globalContext.getString(R.string.not_bind)
         val pleaseBindDevice = App.globalContext.getString(R.string.please_bind_device)
         val bound = App.globalContext.getString(R.string.bound)
-        val deviceCode = App.globalContext.getString(R.string.device_code)
         val bind = App.globalContext.getString(R.string.bind)
         val unbind = App.globalContext.getString(R.string.unbind)
     }

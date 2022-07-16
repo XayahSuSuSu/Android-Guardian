@@ -35,7 +35,6 @@
     <string name="not_bind">Not bind</string>
     <string name="please_bind_device">Please bind device</string>
     <string name="bound">Bound</string>
-    <string name="device_code">Device code</string>
     <string name="bind">Bind</string>
     <string name="unbind">Unbind</string>
 </resources>

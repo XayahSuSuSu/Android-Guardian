@@ -17,3 +17,7 @@ data class DeviceInfo(
     val timestamp: String,
     val code: String,
 )
+
+data class Authorize(
+    val id: String,
+)

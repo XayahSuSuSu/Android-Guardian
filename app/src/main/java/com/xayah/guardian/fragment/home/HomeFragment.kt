@@ -15,6 +15,7 @@ import com.google.gson.Gson
 import com.king.zxing.CameraScan
 import com.king.zxing.CaptureActivity
 import com.xayah.guardian.App
+import com.xayah.guardian.data.Authorize
 import com.xayah.guardian.data.DeviceInfo
 import com.xayah.guardian.databinding.FragmentHomeBinding
 import com.xayah.guardian.util.Server
@@ -117,7 +118,7 @@ class HomeFragment : Fragment() {
             false
         }
         binding.textButtonBind.setOnClickListener {
-            if (viewModel.deviceInfo.code.isEmpty()) {
+            if (!viewModel.isBound.get()) {
                 startActivityLauncher.launch(
                     Intent(
                         requireActivity(),
@@ -140,6 +141,27 @@ class HomeFragment : Fragment() {
                 viewModel.initialize(requireContext())
             }
 
+        }
+
+        binding.iconButtonScan.setOnClickListener {
+            startActivityLauncher.launch(
+                Intent(
+                    requireActivity(),
+                    CaptureActivity::class.java
+                )
+            ) { resultCode, data ->
+                if (resultCode == RESULT_OK) {
+                    val result: String? = CameraScan.parseScanResult(data)
+                    try {
+                        val authorize = Gson().fromJson(result, Authorize::class.java)
+                        CoroutineScope(Dispatchers.IO).launch {
+                            Server.authorize(authorize.id, viewModel.deviceInfo.code) {}
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+            }
         }
 
         viewModel.initialize(requireContext())

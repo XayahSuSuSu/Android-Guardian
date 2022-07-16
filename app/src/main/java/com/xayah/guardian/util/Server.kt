@@ -14,6 +14,7 @@ class Server {
         private val checkApi = "${App.globalContext.readServerAddress()}/api/v1/check"
         private val dataApi = "${App.globalContext.readServerAddress()}/api/v1/app/data"
         private val actionApi = "${App.globalContext.readServerAddress()}/api/v1/action"
+        private val authorizeApi = "${App.globalContext.readServerAddress()}/api/v1/authorize"
 
         fun check(callback: (body: Body) -> Unit) {
             try {
@@ -81,5 +82,32 @@ class Server {
                 e.printStackTrace()
             }
         }
+
+        fun authorize(id: String, deviceCode: String, callback: (body: Body) -> Unit) {
+            try {
+                val client = OkHttpClient()
+                val formBody = FormBody.Builder()
+                    .add("id", id)
+                    .add("device_code", deviceCode)
+                    .build()
+                val request: Request = Request.Builder()
+                    .url(authorizeApi)
+                    .post(formBody)
+                    .build()
+                client.newCall(request).execute().use { response ->
+                    response.body?.apply {
+                        // 解析response.body
+                        try {
+                            callback(Gson().fromJson(this.string(), Body::class.java))
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
+                    }
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+
     }
 }
