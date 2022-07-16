@@ -60,7 +60,7 @@ fun Context.saveDeviceInfo(deviceInfo: DeviceInfo) {
 }
 
 fun Context.readDeviceInfo(): DeviceInfo {
-    var deviceInfo = DeviceInfo("", "")
+    var deviceInfo = DeviceInfo("")
     try {
         deviceInfo = Gson().fromJson(
             readPreferencesString("device_info") ?: "",

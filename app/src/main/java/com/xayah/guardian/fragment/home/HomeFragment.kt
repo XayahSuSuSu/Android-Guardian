@@ -30,9 +30,7 @@ class HomeFragment : Fragment() {
     private lateinit var startActivityLauncher: StartActivityLauncher
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
@@ -121,8 +119,7 @@ class HomeFragment : Fragment() {
             if (!viewModel.isBound.get()) {
                 startActivityLauncher.launch(
                     Intent(
-                        requireActivity(),
-                        CaptureActivity::class.java
+                        requireActivity(), CaptureActivity::class.java
                     )
                 ) { resultCode, data ->
                     if (resultCode == RESULT_OK) {
@@ -131,13 +128,19 @@ class HomeFragment : Fragment() {
                             val deviceInfo = Gson().fromJson(result, DeviceInfo::class.java)
                             App.globalContext.saveDeviceInfo(deviceInfo)
                             viewModel.initialize(requireContext())
+                            CoroutineScope(Dispatchers.IO).launch {
+                                Server.device("是", deviceInfo.device_code) {}
+                            }
                         } catch (e: Exception) {
                             e.printStackTrace()
                         }
                     }
                 }
             } else {
-                App.globalContext.saveDeviceInfo(DeviceInfo("", ""))
+                CoroutineScope(Dispatchers.IO).launch {
+                    Server.device("否", viewModel.deviceInfo.device_code) {}
+                }
+                App.globalContext.saveDeviceInfo(DeviceInfo(""))
                 viewModel.initialize(requireContext())
             }
 
@@ -146,8 +149,7 @@ class HomeFragment : Fragment() {
         binding.iconButtonScan.setOnClickListener {
             startActivityLauncher.launch(
                 Intent(
-                    requireActivity(),
-                    CaptureActivity::class.java
+                    requireActivity(), CaptureActivity::class.java
                 )
             ) { resultCode, data ->
                 if (resultCode == RESULT_OK) {
@@ -155,7 +157,7 @@ class HomeFragment : Fragment() {
                     try {
                         val authorize = Gson().fromJson(result, Authorize::class.java)
                         CoroutineScope(Dispatchers.IO).launch {
-                            Server.authorize(authorize.id, viewModel.deviceInfo.code) {}
+                            Server.authorize(authorize.id, viewModel.deviceInfo.device_code) {}
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()

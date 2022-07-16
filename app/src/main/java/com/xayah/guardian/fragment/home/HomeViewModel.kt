@@ -35,7 +35,7 @@ class HomeViewModel : ViewModel() {
     fun initialize(context: Context) {
         deviceInfo = App.globalContext.readDeviceInfo()
         try {
-            isBound.set(deviceInfo.code.isNotEmpty())
+            isBound.set(deviceInfo.device_code.isNotEmpty())
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -52,7 +52,7 @@ class HomeViewModel : ViewModel() {
         } else {
             bindBtn.set(GlobalString.unbind)
             bindTitle.set(GlobalString.bound)
-            bindText.set(deviceInfo.code.substring(0, 8))
+            bindText.set(deviceInfo.device_code.substring(0, 8))
             bindImage.set(
                 AppCompatResources.getDrawable(
                     context,

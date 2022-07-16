@@ -14,8 +14,7 @@ data class Action(
 )
 
 data class DeviceInfo(
-    val timestamp: String,
-    val code: String,
+    val device_code: String,
 )
 
 data class Authorize(
