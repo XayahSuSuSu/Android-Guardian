@@ -12,7 +12,7 @@ import java.io.IOException
 class Server {
     companion object {
         private val checkApi = "${App.globalContext.readServerAddress()}/api/v1/check"
-        private val dataApi = "${App.globalContext.readServerAddress()}/api/v1/app/data"
+        private val stateApi = "${App.globalContext.readServerAddress()}/api/v1/app/state"
         private val actionApi = "${App.globalContext.readServerAddress()}/api/v1/action"
         private val authorizeApi = "${App.globalContext.readServerAddress()}/api/v1/authorize"
         private val deviceApi = "${App.globalContext.readServerAddress()}/api/v1/device"
@@ -38,11 +38,11 @@ class Server {
             }
         }
 
-        fun data(callback: (body: Body) -> Unit) {
+        fun state(deviceCode: String, callback: (body: Body) -> Unit) {
             try {
                 val client = OkHttpClient()
                 val request: Request = Request.Builder()
-                    .url(dataApi)
+                    .url("${stateApi}?device_code=${deviceCode}")
                     .build()
                 client.newCall(request).execute().use { response ->
                     response.body?.apply {
@@ -84,12 +84,20 @@ class Server {
             }
         }
 
-        fun authorize(id: String, deviceCode: String, callback: (body: Body) -> Unit) {
+        fun authorize(
+            id: String,
+            deviceCode: String,
+            rtmpAddressCourt: String,
+            rtmpAddressCar: String,
+            callback: (body: Body) -> Unit
+        ) {
             try {
                 val client = OkHttpClient()
                 val formBody = FormBody.Builder()
                     .add("id", id)
                     .add("device_code", deviceCode)
+                    .add("rtmp_address_court", rtmpAddressCourt)
+                    .add("rtmp_address_car", rtmpAddressCar)
                     .build()
                 val request: Request = Request.Builder()
                     .url(authorizeApi)

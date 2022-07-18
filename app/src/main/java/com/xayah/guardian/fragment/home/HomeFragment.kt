@@ -19,6 +19,8 @@ import com.xayah.guardian.data.Authorize
 import com.xayah.guardian.data.DeviceInfo
 import com.xayah.guardian.databinding.FragmentHomeBinding
 import com.xayah.guardian.util.Server
+import com.xayah.guardian.util.readRTMPAddress
+import com.xayah.guardian.util.readRTMPCarAddress
 import com.xayah.guardian.util.saveDeviceInfo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -157,7 +159,12 @@ class HomeFragment : Fragment() {
                     try {
                         val authorize = Gson().fromJson(result, Authorize::class.java)
                         CoroutineScope(Dispatchers.IO).launch {
-                            Server.authorize(authorize.id, viewModel.deviceInfo.device_code) {}
+                            Server.authorize(
+                                authorize.id,
+                                viewModel.deviceInfo.device_code,
+                                App.globalContext.readRTMPAddress(),
+                                App.globalContext.readRTMPCarAddress()
+                            ) {}
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()
