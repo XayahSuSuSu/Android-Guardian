@@ -12,7 +12,7 @@ import java.io.IOException
 class Server {
     companion object {
         private val checkApi = "${App.globalContext.readServerAddress()}/api/v1/check"
-        private val stateApi = "${App.globalContext.readServerAddress()}/api/v1/app/state"
+        private val stateApi = "${App.globalContext.readServerAddress()}/api/v1/state"
         private val actionApi = "${App.globalContext.readServerAddress()}/api/v1/action"
         private val authorizeApi = "${App.globalContext.readServerAddress()}/api/v1/authorize"
         private val deviceApi = "${App.globalContext.readServerAddress()}/api/v1/device"
