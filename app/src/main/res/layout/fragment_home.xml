@@ -305,7 +305,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="16dp"
-                    android:text="@string/debug"
+                    android:text="@string/manual_mode"
                     android:textAppearance="@style/TextAppearance.Material3.TitleLarge" />
 
                 <com.google.android.material.card.MaterialCardView
