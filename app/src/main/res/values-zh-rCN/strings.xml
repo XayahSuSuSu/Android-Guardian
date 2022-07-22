@@ -37,4 +37,11 @@
     <string name="unbind">解绑</string>
     <string name="edit">编辑</string>
     <string name="streaming_key">串流密钥</string>
+    <string name="record_face">录制人脸</string>
+    <string name="face_data">人脸数据</string>
+    <string name="face_card_desc">在此处录入或管理您的照片</string>
+    <string name="object">对象</string>
+    <string name="number">数量</string>
+    <string name="manage">管理</string>
+    <string name="record">录入</string>
 </resources>

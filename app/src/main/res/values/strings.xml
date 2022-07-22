@@ -39,4 +39,11 @@
     <string name="unbind">Unbind</string>
     <string name="edit">Edit</string>
     <string name="streaming_key">Streaming key</string>
+    <string name="record_face">Record face</string>
+    <string name="face_data">Face data</string>
+    <string name="face_card_desc">Record or manage your photos here</string>
+    <string name="object">Object</string>
+    <string name="number">Number</string>
+    <string name="manage">Manage</string>
+    <string name="record">Record</string>
 </resources>
