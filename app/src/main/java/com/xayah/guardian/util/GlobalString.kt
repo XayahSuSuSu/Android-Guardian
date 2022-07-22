@@ -19,5 +19,7 @@ class GlobalString {
         val rtmpAddress = App.globalContext.getString(R.string.rtmp_address)
         val streamingKey = App.globalContext.getString(R.string.streaming_key)
         val serverAddress = App.globalContext.getString(R.string.server_address)
+        val confirm = App.globalContext.getString(R.string.confirm)
+        val cancel = App.globalContext.getString(R.string.cancel)
     }
 }

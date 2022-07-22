@@ -46,4 +46,6 @@
     <string name="number">Number</string>
     <string name="manage">Manage</string>
     <string name="record">Record</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
 </resources>

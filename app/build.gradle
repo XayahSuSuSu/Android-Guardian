@@ -52,9 +52,6 @@ dependencies {
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 
-    // Design
-    implementation project(":design")
-
     // okhttp3
     implementation 'com.squareup.okhttp3:okhttp:4.9.3'
 

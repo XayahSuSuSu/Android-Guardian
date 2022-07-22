@@ -17,4 +17,3 @@ dependencyResolutionManagement {
 rootProject.name = "Guardian"
 include ':app'
 include ':ijkplayer'
-include ':design'
