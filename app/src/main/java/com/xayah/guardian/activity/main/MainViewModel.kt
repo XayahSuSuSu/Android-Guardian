@@ -1,4 +1,4 @@
-package com.xayah.guardian
+package com.xayah.guardian.activity.main
 
 import androidx.lifecycle.ViewModel
 

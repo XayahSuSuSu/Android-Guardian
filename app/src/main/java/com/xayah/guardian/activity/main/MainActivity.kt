@@ -1,4 +1,4 @@
-package com.xayah.guardian
+package com.xayah.guardian.activity.main
 
 import android.os.Bundle
 import android.view.View
@@ -12,6 +12,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.xayah.guardian.R
 import com.xayah.guardian.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
