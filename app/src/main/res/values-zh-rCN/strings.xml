@@ -35,4 +35,6 @@
     <string name="bound">已绑定</string>
     <string name="bind">绑定</string>
     <string name="unbind">解绑</string>
+    <string name="edit">编辑</string>
+    <string name="streaming_key">串流密钥</string>
 </resources>

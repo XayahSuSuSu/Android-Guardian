@@ -21,11 +21,8 @@ import java.util.*
 
 
 class VideoFragment : Fragment() {
-
     private var _binding: FragmentVideoBinding? = null
-
     private val binding get() = _binding!!
-
     private var mPlayer: IjkMediaPlayer? = null
 
     override fun onCreateView(
@@ -134,6 +131,8 @@ class VideoFragment : Fragment() {
 
             override fun surfaceDestroyed(holder: SurfaceHolder) {}
         })
+
+        viewModel.initialize()
     }
 
     override fun onDestroyView() {

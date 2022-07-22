@@ -37,4 +37,6 @@
     <string name="bound">Bound</string>
     <string name="bind">Bind</string>
     <string name="unbind">Unbind</string>
+    <string name="edit">Edit</string>
+    <string name="streaming_key">Streaming key</string>
 </resources>

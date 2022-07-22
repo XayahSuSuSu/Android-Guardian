@@ -16,5 +16,8 @@ class GlobalString {
         val bound = App.globalContext.getString(R.string.bound)
         val bind = App.globalContext.getString(R.string.bind)
         val unbind = App.globalContext.getString(R.string.unbind)
+        val rtmpAddress = App.globalContext.getString(R.string.rtmp_address)
+        val streamingKey = App.globalContext.getString(R.string.streaming_key)
+        val serverAddress = App.globalContext.getString(R.string.server_address)
     }
 }

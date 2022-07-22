@@ -42,13 +42,12 @@ class MainActivity : AppCompatActivity() {
             R.id.homeFragment,
             R.id.videoFragment,
             R.id.mapFragment,
-            R.id.settingsFragment,
         ).build()
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.bottomNavigation.setOnItemReselectedListener { }
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.homeFragment, R.id.videoFragment, R.id.mapFragment, R.id.settingsFragment -> {
+                R.id.homeFragment, R.id.videoFragment, R.id.mapFragment -> {
                     binding.bottomNavigation.visibility = View.VISIBLE
                 }
                 else -> {

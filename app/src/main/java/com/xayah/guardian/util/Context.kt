@@ -1,7 +1,9 @@
 package com.xayah.guardian.util
 
+import android.app.Activity
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
+import android.content.ContextWrapper
 import com.google.gson.Gson
 import com.xayah.guardian.data.DeviceInfo
 
@@ -70,4 +72,15 @@ fun Context.readDeviceInfo(): DeviceInfo {
         e.printStackTrace()
     }
     return deviceInfo
+}
+
+fun Context.getActivity(): Activity? {
+    var context = this
+    while (context is ContextWrapper) {
+        if (context is Activity) {
+            return context
+        }
+        context = context.baseContext
+    }
+    return null
 }

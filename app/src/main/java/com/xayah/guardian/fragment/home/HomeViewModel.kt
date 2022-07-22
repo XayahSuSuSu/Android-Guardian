@@ -2,15 +2,16 @@ package com.xayah.guardian.fragment.home
 
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.xayah.guardian.App
 import com.xayah.guardian.R
-import com.xayah.guardian.util.GlobalString
-import com.xayah.guardian.util.Server
-import com.xayah.guardian.util.readDeviceInfo
+import com.xayah.guardian.util.*
+import com.xayah.guardian.view.setWithEdit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -32,7 +33,10 @@ class HomeViewModel : ViewModel() {
     var bindBtn = ObservableField("")
     var bindImage = ObservableField<Drawable>()
 
+    var serverAddress = ObservableField("")
+
     fun initialize(context: Context) {
+        serverAddress.set(App.globalContext.readServerAddress())
         deviceInfo = App.globalContext.readDeviceInfo()
         try {
             isBound.set(deviceInfo.device_code.isNotEmpty())
@@ -151,5 +155,14 @@ class HomeViewModel : ViewModel() {
             }
         }
         return null
+    }
+
+    fun onEdit(v: View) {
+        MaterialAlertDialogBuilder(v.context).apply {
+            setWithEdit(v.context, GlobalString.serverAddress, v.context.readServerAddress()) {
+                v.context.saveServerAddress(it.trim())
+                serverAddress.set(it.trim())
+            }
+        }
     }
 }

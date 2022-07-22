@@ -101,6 +101,8 @@ class MapFragment : Fragment() {
 
             override fun surfaceDestroyed(holder: SurfaceHolder) {}
         })
+
+        viewModel.initialize()
     }
 
     override fun onStart() {
