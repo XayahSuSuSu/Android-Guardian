@@ -75,7 +75,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="end"
                             android:onClick="@{(v)->viewModel.onEdit(v)}"
-                            android:text="@string/edit" />
+                            android:text="@string/check" />
 
                     </LinearLayout>
 
