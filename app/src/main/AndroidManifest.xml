@@ -30,6 +30,9 @@
             android:value="FSFBZ-ORBCX-YXQ4D-TJANU-NK6GQ-GVFJI" />
 
         <activity
+            android:name=".activity.list.PictureListActivity"
+            android:exported="false" />
+        <activity
             android:name="com.king.zxing.CaptureActivity"
             android:screenOrientation="fullSensor"
             android:theme="@style/CaptureTheme" />

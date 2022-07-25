@@ -1,6 +1,7 @@
 package com.xayah.guardian.fragment.home
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
@@ -10,6 +11,7 @@ import androidx.lifecycle.ViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.xayah.guardian.App
 import com.xayah.guardian.R
+import com.xayah.guardian.activity.list.PictureListActivity
 import com.xayah.guardian.util.*
 import com.xayah.guardian.view.setWithEdit
 import kotlinx.coroutines.CoroutineScope
@@ -164,5 +166,14 @@ class HomeViewModel : ViewModel() {
                 serverAddress.set(it.trim())
             }
         }
+    }
+
+    fun toPictureListActivity(v: View) {
+        v.context.startActivity(
+            Intent(
+                v.context,
+                PictureListActivity::class.java
+            )
+        )
     }
 }
