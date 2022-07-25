@@ -13,8 +13,8 @@
     <string name="unknown">Unknown</string>
     <string name="config">Config</string>
     <string name="server_address">Server address</string>
-    <string name="default_server_address" translatable="false">http://192.168.1.124:33307</string>
-    <string name="default_rtmp_address" translatable="false">rtmp://192.168.72.50:33308/stream/record</string>
+    <string name="default_server_address" translatable="false">http://118.24.139.23:33307</string>
+    <string name="default_rtmp_address" translatable="false">rtmp://118.24.139.23:33308/stream/court</string>
     <string name="rtmp_address">RTMP Address</string>
     <string name="video_decoder">Video decoder</string>
     <string name="fps">fps</string>
@@ -26,7 +26,7 @@
     <string name="court_camera">Court camera</string>
     <string name="live_map">Live map</string>
     <string name="car_camera">Car camera</string>
-    <string name="default_rtmp_car_address" translatable="false">rtmp://192.168.1.124:33308/stream/car</string>
+    <string name="default_rtmp_car_address" translatable="false">rtmp://118.24.139.23:33308/stream/car</string>
     <string name="rtmp_car_address">RTMP Car Address</string>
     <string name="run_state">Run state</string>
     <string name="refresh">Refresh</string>
