@@ -457,6 +457,7 @@
                                 android:text="@string/manage" />
 
                             <com.google.android.material.button.MaterialButton
+                                android:id="@+id/materialButton_record"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginHorizontal="8dp"

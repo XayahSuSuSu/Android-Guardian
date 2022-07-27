@@ -7,10 +7,13 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.ObservableBoolean
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.dylanc.activityresult.launcher.StartActivityLauncher
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.Gson
 import com.king.zxing.CameraScan
 import com.king.zxing.CaptureActivity
@@ -18,18 +21,19 @@ import com.xayah.guardian.App
 import com.xayah.guardian.data.Authorize
 import com.xayah.guardian.data.DeviceInfo
 import com.xayah.guardian.databinding.FragmentHomeBinding
-import com.xayah.guardian.util.Server
-import com.xayah.guardian.util.readRTMPAddress
-import com.xayah.guardian.util.readRTMPCarAddress
-import com.xayah.guardian.util.saveDeviceInfo
+import com.xayah.guardian.util.*
+import com.xayah.guardian.view.setWithEdit
+import com.xayah.materialyoufileexplorer.MaterialYouFileExplorer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.io.File
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: HomeViewModel
+    private lateinit var materialYouFileExplorer: MaterialYouFileExplorer
     private lateinit var startActivityLauncher: StartActivityLauncher
 
     override fun onCreateView(
@@ -176,6 +180,46 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+        binding.materialButtonRecord.setOnClickListener {
+            val view = it
+            materialYouFileExplorer.apply {
+                isFile = true
+                suffixFilter = ArrayList("jpg,jpeg,png".split(","))
+                filterWhitelist = true
+                defPath = "/storage/emulated/0/DCIM"
+
+                toExplorer(it.context) { path, _ ->
+                    val context = requireContext()
+                    MaterialAlertDialogBuilder(context).apply {
+                        setWithEdit(context, GlobalString.editName, "") {
+                            BottomSheetDialog(context).apply {
+                                setLoading()
+                                CoroutineScope(Dispatchers.IO).launch {
+                                    Server.picturesUpload(
+                                        it,
+                                        viewModel.deviceInfo.device_code,
+                                        File(path)
+                                    ) {
+                                        dismiss()
+                                        if (it.code != 1) {
+                                            Toast.makeText(
+                                                context,
+                                                GlobalString.uploadFailed,
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        } else {
+                                            CoroutineScope(Dispatchers.Main).launch {
+                                                viewModel.toPictureListActivity(view)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
         binding.materialButtonRefresh.setOnClickListener {
             initialize()
         }
@@ -186,6 +230,9 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         startActivityLauncher = StartActivityLauncher(requireActivity())
+        materialYouFileExplorer = MaterialYouFileExplorer().apply {
+            initialize(requireActivity())
+        }
     }
 
     override fun onResume() {
