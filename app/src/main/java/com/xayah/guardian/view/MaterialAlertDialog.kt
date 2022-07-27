@@ -2,6 +2,7 @@ package com.xayah.guardian.view
 
 import android.content.Context
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.xayah.guardian.R
 import com.xayah.guardian.databinding.ViewDialogTextFieldBinding
 import com.xayah.guardian.util.GlobalString
 import com.xayah.guardian.util.getActivity
@@ -27,5 +28,22 @@ fun MaterialAlertDialogBuilder.setWithEdit(
             setNegativeButton(GlobalString.cancel) { _, _ -> }
             show()
         }
+    }
+}
+
+fun MaterialAlertDialogBuilder.setWithConfirm(
+    message: String,
+    cancelable: Boolean = true,
+    hasNegativeBtn: Boolean = true,
+    callback: () -> Unit
+) {
+    this.apply {
+        setTitle(context.getString(R.string.tips))
+        setCancelable(cancelable)
+        setMessage(message)
+        if (hasNegativeBtn)
+            setNegativeButton(context.getString(R.string.cancel)) { _, _ -> }
+        setPositiveButton(context.getString(R.string.confirm)) { _, _ -> callback() }
+        show()
     }
 }

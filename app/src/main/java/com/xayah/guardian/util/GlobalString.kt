@@ -21,5 +21,9 @@ class GlobalString {
         val serverAddress = App.globalContext.getString(R.string.server_address)
         val confirm = App.globalContext.getString(R.string.confirm)
         val cancel = App.globalContext.getString(R.string.cancel)
+        val editName = App.globalContext.getString(R.string.edit_name)
+        val pleaseWait = App.globalContext.getString(R.string.please_wait)
+        val uploadFailed = App.globalContext.getString(R.string.upload_failed)
+        val confirmDelete = App.globalContext.getString(R.string.confirm_delete)
     }
 }

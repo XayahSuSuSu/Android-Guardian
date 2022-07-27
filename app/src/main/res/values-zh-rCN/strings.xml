@@ -49,4 +49,9 @@
     <string name="pictures_management">照片管理</string>
     <string name="delete">删除</string>
     <string name="check">查看</string>
+    <string name="edit_name">编辑姓名</string>
+    <string name="please_wait">请稍等</string>
+    <string name="upload_failed">上传失败</string>
+    <string name="tips">提示</string>
+    <string name="confirm_delete">确定要删除吗？</string>
 </resources>

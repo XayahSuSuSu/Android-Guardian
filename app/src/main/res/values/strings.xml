@@ -51,4 +51,9 @@
     <string name="pictures_management">Pictures management</string>
     <string name="delete">Delete</string>
     <string name="check">Check</string>
+    <string name="edit_name">Edit name</string>
+    <string name="please_wait">Please wait</string>
+    <string name="upload_failed">上传失败</string>
+    <string name="tips">Tips</string>
+    <string name="confirm_delete">确定要删除吗？</string>
 </resources>
