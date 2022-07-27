@@ -55,12 +55,16 @@ class PictureListActivity : AppCompatActivity() {
                 val adapterList = mutableListOf<Any>()
                 CoroutineScope(Dispatchers.IO).launch {
                     Server.pictures(deviceInfo.device_code) {
+                        val objectList = mutableListOf<String>()
                         for (i in it.data) {
-                            adapterList.add(Gson().fromJson(i, Picture::class.java))
+                            val picture = Gson().fromJson(i, Picture::class.java)
+                            if (objectList.indexOf(picture.name) == -1) objectList.add(picture.name)
+                            adapterList.add(picture)
                             CoroutineScope(Dispatchers.Main).launch {
                                 adapter?.notifyDataSetChanged()
                             }
                         }
+                        App.globalContext.savePicturesNum("${objectList.size}-${it.data.size()}")
                     }
                 }
                 items = adapterList

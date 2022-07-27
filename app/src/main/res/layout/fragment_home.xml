@@ -396,10 +396,10 @@
                                 android:orientation="vertical">
 
                                 <com.google.android.material.textview.MaterialTextView
-                                    android:id="@+id/app"
+                                    android:id="@+id/objectNum"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="1"
+                                    android:text="@{viewModel.pictureNumList[0]}"
                                     android:textAppearance="@style/TextAppearance.Material3.DisplayLarge"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />
@@ -410,7 +410,7 @@
                                     android:text="@string/object"
                                     android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@id/app" />
+                                    app:layout_constraintTop_toBottomOf="@id/objectNum" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -421,10 +421,10 @@
                                 android:orientation="vertical">
 
                                 <com.google.android.material.textview.MaterialTextView
-                                    android:id="@+id/data"
+                                    android:id="@+id/pictureNum"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="2"
+                                    android:text="@{viewModel.pictureNumList[1]}"
                                     android:textAppearance="@style/TextAppearance.Material3.DisplayLarge"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />
@@ -435,7 +435,7 @@
                                     android:text="@string/number"
                                     android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
                                     app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@id/data" />
+                                    app:layout_constraintTop_toBottomOf="@id/pictureNum" />
 
                             </LinearLayout>
 

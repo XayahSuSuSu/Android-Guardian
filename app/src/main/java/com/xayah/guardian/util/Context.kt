@@ -82,6 +82,14 @@ fun Context.saveDeviceInfo(deviceInfo: DeviceInfo) {
     savePreferences("device_info", Gson().toJson(deviceInfo))
 }
 
+fun Context.readPicturesNum(): String {
+    return readPreferencesString("pictures_num") ?: "0-0"
+}
+
+fun Context.savePicturesNum(nunStr: String) {
+    savePreferences("pictures_num", nunStr)
+}
+
 fun Context.readDeviceInfo(): DeviceInfo {
     var deviceInfo = DeviceInfo("")
     try {
