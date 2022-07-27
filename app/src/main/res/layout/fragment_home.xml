@@ -344,6 +344,7 @@
                         </LinearLayout>
 
                         <com.google.android.material.button.MaterialButton
+                            android:id="@+id/materialButton_refresh"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="end"
@@ -399,7 +400,7 @@
                                     android:id="@+id/objectNum"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@{viewModel.pictureNumList[0]}"
+                                    android:text="@{viewModel.objectNum}"
                                     android:textAppearance="@style/TextAppearance.Material3.DisplayLarge"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />
@@ -424,7 +425,7 @@
                                     android:id="@+id/pictureNum"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@{viewModel.pictureNumList[1]}"
+                                    android:text="@{viewModel.pictureNum}"
                                     android:textAppearance="@style/TextAppearance.Material3.DisplayLarge"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />

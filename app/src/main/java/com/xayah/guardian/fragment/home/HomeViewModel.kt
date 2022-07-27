@@ -37,9 +37,13 @@ class HomeViewModel : ViewModel() {
 
     var serverAddress = ObservableField("")
 
-    var pictureNumList = App.globalContext.readPicturesNum().split("-")
+    var objectNum = ObservableField("0")
+    var pictureNum = ObservableField("0")
 
     fun initialize(context: Context) {
+        val numList = App.globalContext.readPicturesNum().split("-")
+        objectNum.set(numList[0])
+        pictureNum.set(numList[1])
         serverAddress.set(App.globalContext.readServerAddress())
         deviceInfo = App.globalContext.readDeviceInfo()
         try {

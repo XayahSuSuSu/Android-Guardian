@@ -29,6 +29,7 @@ import kotlinx.coroutines.launch
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    private lateinit var viewModel: HomeViewModel
     private lateinit var startActivityLauncher: StartActivityLauncher
 
     override fun onCreateView(
@@ -41,9 +42,13 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val viewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
+        viewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
         binding.viewModel = viewModel
 
+        initialize()
+    }
+
+    fun initialize() {
         val flag = ObservableBoolean(true)
         binding.buttonUp.setOnTouchListener { v, event ->
             v.performClick()
@@ -147,7 +152,6 @@ class HomeFragment : Fragment() {
             }
 
         }
-
         binding.iconButtonScan.setOnClickListener {
             startActivityLauncher.launch(
                 Intent(
@@ -172,6 +176,9 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+        binding.materialButtonRefresh.setOnClickListener {
+            initialize()
+        }
 
         viewModel.initialize(requireContext())
     }
@@ -179,6 +186,11 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         startActivityLauncher = StartActivityLauncher(requireActivity())
+    }
+
+    override fun onResume() {
+        super.onResume()
+        initialize()
     }
 
     override fun onDestroyView() {
