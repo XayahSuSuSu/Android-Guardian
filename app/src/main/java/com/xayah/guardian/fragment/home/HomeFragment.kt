@@ -61,12 +61,12 @@ class HomeFragment : Fragment() {
                 when (event.action) {
                     MotionEvent.ACTION_DOWN -> {
                         while (flag.get()) {
-                            Server.action("up") {}
+                            App.server.action("up") {}
                         }
                     }
                     MotionEvent.ACTION_UP -> {
                         flag.set(false)
-                        Server.action("cancel") {}
+                        App.server.action("cancel") {}
                     }
                 }
             }
@@ -79,12 +79,12 @@ class HomeFragment : Fragment() {
                 when (event.action) {
                     MotionEvent.ACTION_DOWN -> {
                         while (flag.get()) {
-                            Server.action("left") {}
+                            App.server.action("left") {}
                         }
                     }
                     MotionEvent.ACTION_UP -> {
                         flag.set(false)
-                        Server.action("cancel") {}
+                        App.server.action("cancel") {}
                     }
                 }
             }
@@ -97,12 +97,12 @@ class HomeFragment : Fragment() {
                 when (event.action) {
                     MotionEvent.ACTION_DOWN -> {
                         while (flag.get()) {
-                            Server.action("down") {}
+                            App.server.action("down") {}
                         }
                     }
                     MotionEvent.ACTION_UP -> {
                         flag.set(false)
-                        Server.action("cancel") {}
+                        App.server.action("cancel") {}
                     }
                 }
             }
@@ -115,12 +115,12 @@ class HomeFragment : Fragment() {
                 when (event.action) {
                     MotionEvent.ACTION_DOWN -> {
                         while (flag.get()) {
-                            Server.action("right") {}
+                            App.server.action("right") {}
                         }
                     }
                     MotionEvent.ACTION_UP -> {
                         flag.set(false)
-                        Server.action("cancel") {}
+                        App.server.action("cancel") {}
                     }
                 }
             }
@@ -140,7 +140,7 @@ class HomeFragment : Fragment() {
                             App.globalContext.saveDeviceInfo(deviceInfo)
                             viewModel.initialize(requireContext())
                             CoroutineScope(Dispatchers.IO).launch {
-                                Server.device("是", deviceInfo.device_code) {}
+                                App.server.device("是", deviceInfo.device_code) {}
                             }
                         } catch (e: Exception) {
                             e.printStackTrace()
@@ -149,7 +149,7 @@ class HomeFragment : Fragment() {
                 }
             } else {
                 CoroutineScope(Dispatchers.IO).launch {
-                    Server.device("否", viewModel.deviceInfo.device_code) {}
+                    App.server.device("否", viewModel.deviceInfo.device_code) {}
                 }
                 App.globalContext.saveDeviceInfo(DeviceInfo(""))
                 viewModel.initialize(requireContext())
@@ -167,7 +167,7 @@ class HomeFragment : Fragment() {
                     try {
                         val authorize = Gson().fromJson(result, Authorize::class.java)
                         CoroutineScope(Dispatchers.IO).launch {
-                            Server.authorize(
+                            App.server.authorize(
                                 authorize.id,
                                 viewModel.deviceInfo.device_code,
                                 App.globalContext.readRTMPAddress(),
@@ -195,7 +195,7 @@ class HomeFragment : Fragment() {
                             BottomSheetDialog(context).apply {
                                 setLoading()
                                 CoroutineScope(Dispatchers.IO).launch {
-                                    Server.picturesUpload(
+                                    App.server.picturesUpload(
                                         it,
                                         viewModel.deviceInfo.device_code,
                                         File(path)

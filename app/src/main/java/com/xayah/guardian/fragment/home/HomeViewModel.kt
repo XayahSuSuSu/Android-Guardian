@@ -86,11 +86,11 @@ class HomeViewModel : ViewModel() {
                 )
             )
 
-            Server.check {
+            App.server.check {
                 if (it.code == 1)
                     server.set(GlobalString.connected)
             }
-            Server.state(deviceInfo.device_code) {
+            App.server.state(deviceInfo.device_code) {
                 if (it.code == 1) {
                     state.set(it.data["state"].asString)
 

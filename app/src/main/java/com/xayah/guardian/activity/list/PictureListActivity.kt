@@ -46,7 +46,7 @@ class PictureListActivity : AppCompatActivity() {
                 })
                 val adapterList = mutableListOf<Any>()
                 CoroutineScope(Dispatchers.IO).launch {
-                    Server.pictures(deviceInfo.device_code) {
+                    App.server.pictures(deviceInfo.device_code) {
                         val objectList = mutableListOf<String>()
                         for (i in it.data) {
                             val picture = Gson().fromJson(i, Picture::class.java)

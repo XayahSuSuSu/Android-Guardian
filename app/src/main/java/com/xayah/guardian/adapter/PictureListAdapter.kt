@@ -48,7 +48,7 @@ open class PictureListAdapter(val callback: () -> Unit) :
                         BottomSheetDialog(context).apply {
                             setLoading()
                             CoroutineScope(Dispatchers.IO).launch {
-                                Server.picturesDelete(item.path) {
+                                App.server.picturesDelete(item.path) {
                                     dismiss()
                                     CoroutineScope(Dispatchers.Main).launch {
                                         callback()

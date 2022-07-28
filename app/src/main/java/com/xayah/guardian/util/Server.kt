@@ -6,54 +6,51 @@ import com.xayah.guardian.data.Body
 import com.xayah.guardian.data.PicturesBody
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import java.io.IOException
 
 
 class Server {
-    companion object {
-        private val checkApi = "${App.globalContext.readServerAddress()}/api/v1/check"
-        private val stateApi = "${App.globalContext.readServerAddress()}/api/v1/state"
-        private val actionApi = "${App.globalContext.readServerAddress()}/api/v1/action"
-        private val authorizeApi = "${App.globalContext.readServerAddress()}/api/v1/authorize"
-        private val deviceApi = "${App.globalContext.readServerAddress()}/api/v1/device"
-        private val picturesApi = "${App.globalContext.readServerAddress()}/api/v1/pictures"
-        private val picturesDeleteApi =
-            "${App.globalContext.readServerAddress()}/api/v1/pictures/delete"
-        private val picturesUploadApi = "${App.globalContext.readServerAddress()}/api/v1/pictures"
+    private val client = OkHttpClient()
+    private val checkApi = "${App.globalContext.readServerAddress()}/api/v1/check"
+    private val stateApi = "${App.globalContext.readServerAddress()}/api/v1/state"
+    private val actionApi = "${App.globalContext.readServerAddress()}/api/v1/action"
+    private val authorizeApi = "${App.globalContext.readServerAddress()}/api/v1/authorize"
+    private val deviceApi = "${App.globalContext.readServerAddress()}/api/v1/device"
+    private val picturesApi = "${App.globalContext.readServerAddress()}/api/v1/pictures"
+    private val picturesDeleteApi =
+        "${App.globalContext.readServerAddress()}/api/v1/pictures/delete"
+    private val picturesUploadApi = "${App.globalContext.readServerAddress()}/api/v1/pictures"
 
-        fun check(callback: (body: Body) -> Unit) {
-            try {
-                val client = OkHttpClient()
-                val request: Request = Request.Builder()
-                    .url(checkApi)
-                    .build()
-                client.newCall(request).execute().use { response ->
-                    response.body?.apply {
-                        // 解析response.body
-                        try {
-                            callback(Gson().fromJson(this.string(), Body::class.java))
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                        }
+    fun check(callback: (body: Body) -> Unit) {
+        try {
+            val request: Request = Request.Builder()
+                .url(checkApi)
+                .build()
+            client.newCall(request).execute().use { response ->
+                response.body?.apply {
+                    // 解析response.body
+                    try {
+                        callback(Gson().fromJson(this.string(), Body::class.java))
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
-            } catch (e: IOException) {
-                e.printStackTrace()
             }
+        } catch (e: IOException) {
+            e.printStackTrace()
         }
+    }
 
-        fun state(deviceCode: String, callback: (body: Body) -> Unit) {
-            try {
-                val client = OkHttpClient()
-                val request: Request = Request.Builder()
-                    .url("${stateApi}?device_code=${deviceCode}")
-                    .build()
-                client.newCall(request).execute().use { response ->
-                    response.body?.apply {
-                        // 解析response.body
+    fun state(deviceCode: String, callback: (body: Body) -> Unit) {
+        try {
+            val request: Request = Request.Builder()
+                .url("${stateApi}?device_code=${deviceCode}")
+                .build()
+            client.newCall(request).execute().use { response ->
+                response.body?.apply {
+                    // 解析response.body
                         try {
                             callback(Gson().fromJson(this.string(), Body::class.java))
                         } catch (e: Exception) {
@@ -68,7 +65,6 @@ class Server {
 
         fun action(action: String, callback: (body: Body) -> Unit) {
             try {
-                val client = OkHttpClient()
                 val formBody = FormBody.Builder()
                     .add("action", action)
                     .build()
@@ -99,7 +95,6 @@ class Server {
             callback: (body: Body) -> Unit
         ) {
             try {
-                val client = OkHttpClient()
                 val formBody = FormBody.Builder()
                     .add("id", id)
                     .add("device_code", deviceCode)
@@ -127,7 +122,6 @@ class Server {
 
         fun device(bindState: String, deviceCode: String, callback: (body: Body) -> Unit) {
             try {
-                val client = OkHttpClient()
                 val formBody = FormBody.Builder()
                     .add("bind_state", bindState)
                     .add("device_code", deviceCode)
@@ -153,7 +147,6 @@ class Server {
 
         fun pictures(deviceCode: String, callback: (body: PicturesBody) -> Unit) {
             try {
-                val client = OkHttpClient()
                 val request: Request = Request.Builder()
                     .url("${picturesApi}?device_code=${deviceCode}")
                     .build()
@@ -175,7 +168,6 @@ class Server {
 
         fun picturesDelete(path: String, callback: (body: Body) -> Unit) {
             try {
-                val client = OkHttpClient()
                 val formBody = FormBody.Builder()
                     .add("path", path)
                     .build()
@@ -205,7 +197,6 @@ class Server {
             callback: (body: Body) -> Unit
         ) {
             try {
-                val client = OkHttpClient()
                 val MEDIA_TYPE_PNG: MediaType = "image/png".toMediaType()
                 val multipartBody = MultipartBody.Builder().apply {
                     setType(MultipartBody.FORM)
@@ -231,5 +222,4 @@ class Server {
                 e.printStackTrace()
             }
         }
-    }
 }
