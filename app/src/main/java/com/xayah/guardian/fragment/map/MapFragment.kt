@@ -15,11 +15,16 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.permissionx.guolindev.PermissionX
+import com.tencent.tencentmap.mapsdk.maps.CameraUpdateFactory
+import com.tencent.tencentmap.mapsdk.maps.model.CameraPosition
+import com.tencent.tencentmap.mapsdk.maps.model.LatLng
+import com.tencent.tencentmap.mapsdk.maps.model.MarkerOptions
 import com.xayah.guardian.App
 import com.xayah.guardian.databinding.FragmentMapBinding
 import com.xayah.guardian.util.readRTMPCarAddress
 import tv.danmaku.ijk.media.player.IjkMediaPlayer
 import java.io.IOException
+
 
 class MapFragment : Fragment() {
 
@@ -108,6 +113,20 @@ class MapFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         binding.mapView.onStart()
+        CameraUpdateFactory.newCameraPosition(
+            CameraPosition(
+                LatLng(28.177151, 112.947833), //中心点
+                20F, // 缩放级别
+                22.5F, // 倾斜角
+                0F
+            )
+        ).apply {
+            binding.mapView.map.moveCamera(this) //移动地图
+        }
+        LatLng(28.177151, 112.947833).apply {
+            binding.mapView.map.addMarker(MarkerOptions(this)) // 添加标记点
+        }
+
     }
 
     override fun onResume() {
