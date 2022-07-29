@@ -123,7 +123,7 @@ class MapFragment : Fragment() {
         ).apply {
             binding.mapView.map.moveCamera(this) //移动地图
         }
-        LatLng(28.177151, 112.947833).apply {
+        LatLng(28.17717,112.947778).apply {
             binding.mapView.map.addMarker(MarkerOptions(this)) // 添加标记点
         }
 
