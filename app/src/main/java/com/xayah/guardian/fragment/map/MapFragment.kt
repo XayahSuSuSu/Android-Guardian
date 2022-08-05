@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.permissionx.guolindev.PermissionX
 import com.tencent.tencentmap.mapsdk.maps.CameraUpdateFactory
+import com.tencent.tencentmap.mapsdk.maps.TencentMap
 import com.tencent.tencentmap.mapsdk.maps.model.CameraPosition
 import com.tencent.tencentmap.mapsdk.maps.model.LatLng
 import com.tencent.tencentmap.mapsdk.maps.model.MarkerOptions
@@ -113,17 +114,18 @@ class MapFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         binding.mapView.onStart()
+        binding.mapView.map.setMapType(TencentMap.MAP_TYPE_SATELLITE);
         CameraUpdateFactory.newCameraPosition(
             CameraPosition(
-                LatLng(28.177151, 112.947833), //中心点
-                20F, // 缩放级别
+                LatLng(28.176562, 112.947661), //中心点
+                18.8F, // 缩放级别
                 22.5F, // 倾斜角
                 0F
             )
         ).apply {
             binding.mapView.map.moveCamera(this) //移动地图
         }
-        LatLng(28.17717,112.947778).apply {
+        LatLng(28.176562, 112.947661).apply {
             binding.mapView.map.addMarker(MarkerOptions(this)) // 添加标记点
         }
 
