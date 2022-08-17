@@ -117,7 +117,7 @@ class MapFragment : Fragment() {
         binding.mapView.map.setMapType(TencentMap.MAP_TYPE_SATELLITE);
         CameraUpdateFactory.newCameraPosition(
             CameraPosition(
-                LatLng(28.176562, 112.947661), //中心点
+                LatLng(28.174712,112.946342), //中心点
                 18.8F, // 缩放级别
                 22.5F, // 倾斜角
                 0F
@@ -125,7 +125,7 @@ class MapFragment : Fragment() {
         ).apply {
             binding.mapView.map.moveCamera(this) //移动地图
         }
-        LatLng(28.176562, 112.947661).apply {
+        LatLng(28.174712,112.946342).apply {
             binding.mapView.map.addMarker(MarkerOptions(this)) // 添加标记点
         }
 
