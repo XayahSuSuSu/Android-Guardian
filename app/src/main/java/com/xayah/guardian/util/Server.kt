@@ -13,15 +13,22 @@ import java.io.IOException
 
 class Server {
     private val client = OkHttpClient()
-    private val checkApi = "${App.globalContext.readServerAddress()}/api/v1/check"
-    private val stateApi = "${App.globalContext.readServerAddress()}/api/v1/state"
-    private val actionApi = "${App.globalContext.readServerAddress()}/api/v1/action"
-    private val authorizeApi = "${App.globalContext.readServerAddress()}/api/v1/authorize"
-    private val deviceApi = "${App.globalContext.readServerAddress()}/api/v1/device"
-    private val picturesApi = "${App.globalContext.readServerAddress()}/api/v1/pictures"
-    private val picturesDeleteApi =
-        "${App.globalContext.readServerAddress()}/api/v1/pictures/delete"
-    private val picturesUploadApi = "${App.globalContext.readServerAddress()}/api/v1/pictures"
+    private val checkApi
+        get() = "${App.globalContext.readServerAddress()}/api/v1/check"
+    private val stateApi
+        get() = "${App.globalContext.readServerAddress()}/api/v1/state"
+    private val actionApi
+        get() = "${App.globalContext.readServerAddress()}/api/v1/action"
+    private val authorizeApi
+        get() = "${App.globalContext.readServerAddress()}/api/v1/authorize"
+    private val deviceApi
+        get() = "${App.globalContext.readServerAddress()}/api/v1/device"
+    private val picturesApi
+        get() = "${App.globalContext.readServerAddress()}/api/v1/pictures"
+    private val picturesDeleteApi
+        get() = "${App.globalContext.readServerAddress()}/api/v1/pictures/delete"
+    private val picturesUploadApi
+        get() = "${App.globalContext.readServerAddress()}/api/v1/pictures"
 
     fun check(callback: (body: Body) -> Unit) {
         try {
