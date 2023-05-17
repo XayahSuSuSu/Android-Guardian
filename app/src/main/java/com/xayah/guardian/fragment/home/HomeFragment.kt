@@ -18,10 +18,15 @@ import com.google.gson.Gson
 import com.king.zxing.CameraScan
 import com.king.zxing.CaptureActivity
 import com.xayah.guardian.App
+import com.xayah.guardian.R
 import com.xayah.guardian.data.Authorize
 import com.xayah.guardian.data.DeviceInfo
 import com.xayah.guardian.databinding.FragmentHomeBinding
-import com.xayah.guardian.util.*
+import com.xayah.guardian.util.GlobalString
+import com.xayah.guardian.util.readRTMPAddress
+import com.xayah.guardian.util.readRTMPCarAddress
+import com.xayah.guardian.util.saveDeviceInfo
+import com.xayah.guardian.util.setLoading
 import com.xayah.guardian.view.setWithEdit
 import com.xayah.materialyoufileexplorer.MaterialYouFileExplorer
 import kotlinx.coroutines.CoroutineScope
@@ -137,10 +142,19 @@ class HomeFragment : Fragment() {
                         val result: String? = CameraScan.parseScanResult(data)
                         try {
                             val deviceInfo = Gson().fromJson(result, DeviceInfo::class.java)
-                            App.globalContext.saveDeviceInfo(deviceInfo)
-                            viewModel.initialize(requireContext())
-                            CoroutineScope(Dispatchers.IO).launch {
-                                App.server.device("是", deviceInfo.device_code) {}
+                            if (deviceInfo.device_code != null) {
+                                CoroutineScope(Dispatchers.IO).launch {
+                                    App.server.device("是", deviceInfo.device_code) {
+                                        App.globalContext.saveDeviceInfo(deviceInfo)
+                                        viewModel.initialize(requireContext())
+                                    }
+                                }
+                            } else {
+                                Toast.makeText(
+                                    this@HomeFragment.context,
+                                    getString(R.string.qrcode_error),
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         } catch (e: Exception) {
                             e.printStackTrace()
@@ -149,9 +163,10 @@ class HomeFragment : Fragment() {
                 }
             } else {
                 CoroutineScope(Dispatchers.IO).launch {
-                    App.server.device("否", viewModel.deviceInfo.device_code) {}
+                    App.server.device("否", viewModel.deviceInfo.device_code) {
+                        App.globalContext.saveDeviceInfo(DeviceInfo(""))
+                    }
                 }
-                App.globalContext.saveDeviceInfo(DeviceInfo(""))
                 viewModel.initialize(requireContext())
             }
 
@@ -166,13 +181,21 @@ class HomeFragment : Fragment() {
                     val result: String? = CameraScan.parseScanResult(data)
                     try {
                         val authorize = Gson().fromJson(result, Authorize::class.java)
-                        CoroutineScope(Dispatchers.IO).launch {
-                            App.server.authorize(
-                                authorize.id,
-                                viewModel.deviceInfo.device_code,
-                                App.globalContext.readRTMPAddress(),
-                                App.globalContext.readRTMPCarAddress()
-                            ) {}
+                        if (authorize.id != null) {
+                            CoroutineScope(Dispatchers.IO).launch {
+                                App.server.authorize(
+                                    authorize.id,
+                                    viewModel.deviceInfo.device_code,
+                                    App.globalContext.readRTMPAddress(),
+                                    App.globalContext.readRTMPCarAddress()
+                                ) {}
+                            }
+                        } else {
+                            Toast.makeText(
+                                this@HomeFragment.context,
+                                getString(R.string.qrcode_error),
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()
