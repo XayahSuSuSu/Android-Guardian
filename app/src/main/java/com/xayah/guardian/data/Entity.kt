@@ -33,3 +33,14 @@ data class Picture(
     val name: String,
     val path: String
 )
+
+data class LocationsBody(
+    val lng: String,
+    val lat: String,
+)
+
+data class TranslateBody(
+    val status: Int,
+    val message: String,
+    val locations: List<LocationsBody>
+)

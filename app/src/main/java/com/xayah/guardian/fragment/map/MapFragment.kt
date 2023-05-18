@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.SurfaceHolder
 import android.view.View
@@ -22,7 +23,11 @@ import com.tencent.tencentmap.mapsdk.maps.model.LatLng
 import com.tencent.tencentmap.mapsdk.maps.model.MarkerOptions
 import com.xayah.guardian.App
 import com.xayah.guardian.databinding.FragmentMapBinding
+import com.xayah.guardian.util.readDeviceInfo
 import com.xayah.guardian.util.readRTMPCarAddress
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import tv.danmaku.ijk.media.player.IjkMediaPlayer
 import java.io.IOException
 
@@ -109,26 +114,47 @@ class MapFragment : Fragment() {
         })
 
         viewModel.initialize()
+
+        binding.materialButtonRefresh.setOnClickListener {
+
+            CoroutineScope(Dispatchers.IO).launch {
+                App.server.state(App.globalContext.readDeviceInfo().device_code) {
+                    if (it.code == 1) {
+                        // "28.17821833", "112.94097200"
+                        App.server.translate(it.data["latitude"].asString, it.data["longitude"].asString) {
+                            Log.d("TAG", "translate: ${it}")
+                            if (it.locations.isNotEmpty()) {
+                                val location = it.locations.first()
+                                binding.mapView.map.moveCamera(
+                                    CameraUpdateFactory.newCameraPosition(
+                                        CameraPosition(
+                                            LatLng(location.lat.toDouble(), location.lng.toDouble()), // 中心点
+                                            18.8F, // 缩放级别
+                                            22.5F, // 倾斜角
+                                            0F
+                                        )
+                                    )
+                                ) // 移动地图
+                                binding.mapView.map.addMarker(
+                                    MarkerOptions(
+                                        LatLng(
+                                            location.lat.toDouble(),
+                                            location.lng.toDouble()
+                                        )
+                                    )
+                                ) // 添加标记点
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     override fun onStart() {
         super.onStart()
         binding.mapView.onStart()
-        binding.mapView.map.setMapType(TencentMap.MAP_TYPE_SATELLITE);
-        CameraUpdateFactory.newCameraPosition(
-            CameraPosition(
-                LatLng(28.174712,112.946342), //中心点
-                18.8F, // 缩放级别
-                22.5F, // 倾斜角
-                0F
-            )
-        ).apply {
-            binding.mapView.map.moveCamera(this) //移动地图
-        }
-        LatLng(28.174712,112.946342).apply {
-            binding.mapView.map.addMarker(MarkerOptions(this)) // 添加标记点
-        }
-
+        binding.mapView.map.mapType = TencentMap.MAP_TYPE_SATELLITE
     }
 
     override fun onResume() {
