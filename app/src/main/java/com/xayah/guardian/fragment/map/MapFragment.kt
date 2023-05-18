@@ -88,13 +88,15 @@ class MapFragment : Fragment() {
         mPlayer?.start()
         val surfaceView = binding.surfaceView
         mPlayer?.setOnInfoListener { mp, _, _ ->
-            if (mp.videoWidth != 0)
+            if (mp.videoWidth != 0) {
+                binding.circularProgressIndicator.visibility = View.GONE
                 surfaceView.apply {
                     layoutParams = layoutParams.apply {
                         height =
                             (mp.videoHeight.toFloat() / mp.videoWidth.toFloat() * surfaceView.width.toFloat()).toInt()
                     }
                 }
+            }
             false
         }
         surfaceView.holder.addCallback(object : SurfaceHolder.Callback {

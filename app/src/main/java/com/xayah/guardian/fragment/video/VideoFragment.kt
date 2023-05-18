@@ -16,13 +16,13 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import tv.danmaku.ijk.media.player.IjkMediaPlayer
 import java.io.IOException
-import java.util.*
+import java.util.Locale
 
 
 class VideoFragment : Fragment() {
     private var _binding: FragmentVideoBinding? = null
     private val binding get() = _binding!!
-    private var mPlayer: IjkMediaPlayer? = null
+    private lateinit var viewModel: VideoViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,40 +40,41 @@ class VideoFragment : Fragment() {
     }
 
     private fun initialize() {
-        val viewModel = ViewModelProvider(requireActivity())[VideoViewModel::class.java]
+        viewModel = ViewModelProvider(requireActivity())[VideoViewModel::class.java]
         binding.viewModel = viewModel
 
-        mPlayer = IjkMediaPlayer()
+        viewModel.mPlayer = IjkMediaPlayer()
         try {
-            mPlayer?.dataSource = App.globalContext.readRTMPAddress()
+            viewModel.mPlayer?.dataSource = App.globalContext.readRTMPAddress()
         } catch (e: IOException) {
             e.printStackTrace()
         }
-        mPlayer?.prepareAsync()
-        mPlayer?.start()
+        viewModel.mPlayer?.prepareAsync()
+        viewModel.mPlayer?.start()
         CoroutineScope(Dispatchers.IO).launch {
             while (_binding != null) {
                 delay(1000)
-                when (mPlayer?.videoDecoder) {
+                when (viewModel.mPlayer?.videoDecoder) {
                     IjkMediaPlayer.FFP_PROPV_DECODER_AVCODEC -> {
                         viewModel.videoDecoder.set("avcodec")
                     }
+
                     IjkMediaPlayer.FFP_PROPV_DECODER_MEDIACODEC -> {
                         viewModel.videoDecoder.set("MediaCodec")
                     }
                 }
-                val fpsOutput: Float = mPlayer?.videoOutputFramesPerSecond ?: 0F
-                val fpsDecode: Float = mPlayer?.videoDecodeFramesPerSecond ?: 0F
+                val fpsOutput: Float = viewModel.mPlayer?.videoOutputFramesPerSecond ?: 0F
+                val fpsDecode: Float = viewModel.mPlayer?.videoDecodeFramesPerSecond ?: 0F
                 viewModel.fps.set(
                     String.format(Locale.US, "%.2f / %.2f", fpsDecode, fpsOutput)
                 )
-                val videoCachedDuration: Long = mPlayer?.videoCachedDuration ?: 0
-                val audioCachedDuration: Long = mPlayer?.audioCachedDuration ?: 0
-                val videoCachedBytes: Long = mPlayer?.videoCachedBytes ?: 0
-                val audioCachedBytes: Long = mPlayer?.audioCachedBytes ?: 0
-                val tcpSpeed: Long = mPlayer?.tcpSpeed ?: 0
-                val bitRate: Long = mPlayer?.bitRate ?: 0
-                val seekLoadDuration: Long = mPlayer?.seekLoadDuration ?: 0
+                val videoCachedDuration: Long = viewModel.mPlayer?.videoCachedDuration ?: 0
+                val audioCachedDuration: Long = viewModel.mPlayer?.audioCachedDuration ?: 0
+                val videoCachedBytes: Long = viewModel.mPlayer?.videoCachedBytes ?: 0
+                val audioCachedBytes: Long = viewModel.mPlayer?.audioCachedBytes ?: 0
+                val tcpSpeed: Long = viewModel.mPlayer?.tcpSpeed ?: 0
+                val bitRate: Long = viewModel.mPlayer?.bitRate ?: 0
+                val seekLoadDuration: Long = viewModel.mPlayer?.seekLoadDuration ?: 0
                 viewModel.videoCached.set(
                     String.format(
                         Locale.US,
@@ -105,19 +106,21 @@ class VideoFragment : Fragment() {
 
         }
         val surfaceView = binding.surfaceView
-        mPlayer?.setOnInfoListener { mp, _, _ ->
-            if (mp.videoWidth != 0)
+        viewModel.mPlayer?.setOnInfoListener { mp, _, _ ->
+            if (mp.videoWidth != 0) {
+                binding.circularProgressIndicator.visibility = View.GONE
                 surfaceView.apply {
                     layoutParams = layoutParams.apply {
                         height =
                             (mp.videoHeight.toFloat() / mp.videoWidth.toFloat() * surfaceView.width.toFloat()).toInt()
                     }
                 }
+            }
             false
         }
         surfaceView.holder.addCallback(object : SurfaceHolder.Callback {
             override fun surfaceCreated(holder: SurfaceHolder) {
-                mPlayer?.setDisplay(holder)
+                viewModel.mPlayer?.setDisplay(holder)
             }
 
             override fun surfaceChanged(
@@ -137,7 +140,7 @@ class VideoFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        mPlayer?.stop()
-        mPlayer = null
+        viewModel.mPlayer?.stop()
+        viewModel.mPlayer = null
     }
 }

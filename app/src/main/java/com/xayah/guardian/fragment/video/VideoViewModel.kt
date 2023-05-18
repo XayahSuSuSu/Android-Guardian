@@ -9,7 +9,8 @@ import com.xayah.guardian.util.GlobalString
 import com.xayah.guardian.util.readRTMPAddress
 import com.xayah.guardian.util.saveRTMPAddress
 import com.xayah.guardian.view.setWithEdit
-import java.util.*
+import tv.danmaku.ijk.media.player.IjkMediaPlayer
+import java.util.Locale
 
 
 class VideoViewModel : ViewModel() {
@@ -21,6 +22,7 @@ class VideoViewModel : ViewModel() {
     var bitRate = ObservableField("")
     var seekLoadDuration = ObservableField("")
     var rtmpAddressSubTitle = ObservableField("")
+    var mPlayer: IjkMediaPlayer? = null
 
     fun initialize() {
         rtmpAddressSubTitle.set("${GlobalString.streamingKey}: ${getStreamingKey(App.globalContext.readRTMPAddress())}")
