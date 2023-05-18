@@ -10,7 +10,7 @@
     <style name="Theme.Guardian" parent="Base.Theme.Guardian" />
 
     <style name="Theme.Guardian.SplashScreen" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_logo</item>
         <item name="postSplashScreenTheme">@style/Theme.Guardian</item>
     </style>
 </resources>
